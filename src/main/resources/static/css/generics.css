@@ -1,0 +1,27 @@
+body {
+    background-color: navajowhite;
+}
+
+h2, h3 {
+    font-family: 'Arial', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ombra leggera */
+}
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+table {
+     border: 3px solid black;
+     border-collapse: collapse;
+     border-color: black !important;
+ }
+
+.card {
+    border: 3px solid;
+}
