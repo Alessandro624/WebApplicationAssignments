@@ -10,10 +10,19 @@ h2, h3 {
 .nav-link {
     color: white;
     font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s, border-bottom 0.3s;
+    border-bottom: 2px solid transparent;
 }
 
-.nav-link:hover {
-    text-decoration: underline;
+.nav-link:hover, .nav-link:focus {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid white;
+}
+
+.nav-link.active {
+    border-bottom: 2px solid white;
 }
 
 table {
@@ -24,4 +33,12 @@ table {
 
 .card {
     border: 3px solid;
+}
+
+#bookForm {
+    display: none;
+}
+
+#removeBookForm {
+    display: none;
 }

@@ -9,15 +9,15 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <link rel="stylesheet" href="css/generics.css">
-    <script src="js/addBook.js"></script>
-    <script src="js/removeBook.js"></script>
+    <script src="js/addBook.js" defer></script>
+    <script src="js/removeBook.js" defer></script>
     <title>Linus Torvalds fan page</title>
 </head>
 <body>
     <header class="bg-black text-white p-5 mb-5">
         <div class="container-fluid">
             <h1 class="text-center "><i class="fas fa-book"></i> Linus Torvalds Books</h1>
-            <nav class="text-center text-white-50">
+            <nav class="text-center text-white-50 mt-5">
                 <ul class="nav justify-content-center">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
@@ -38,46 +38,87 @@
         </div>
 
         <div class="text-end mb-3">
-            <button class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-sort-alpha-down"></i> Sort by Title</button>
-            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-sort-numeric-down"></i> Sort by Year</button>
+            <!--button class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-sort-alpha-down"></i> Sort by Title</button>
+            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-sort-numeric-down"></i> Sort by Year</button-->
+            <button class="btn btn-primary btm-sm me-2" id="addBookButton"><i class="fas fa-plus"></i> Add a book</button>
+            <button class="btn btn-danger btm-sm" id="removeBookButton"><i class="fas fa-trash"></i> Remove a book by number</button>
         </div>
 
         <section class="mb-5">
-            <table class="table table-striped table-hover table-bordered caption-top">
+            <table class="table table-striped table-hover table-bordered caption-top align-middle" id="booksTable">
                 <caption class="text-center text-black">Linus Torvalds Books Table</caption>
                 <thead class="table-dark">
                     <tr>
                         <th>Title</th>
                         <th>Publisher</th>
                         <th>Year</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     <tr>
                         <td>Just for Fun: The Story of an Accidental Revolutionary</td>
                         <td>Harper Business</td>
-                        <td><span class="badge bg-primary">2001</span></td>
+                        <td><span class="badge bg-primary d-block mx-auto">2001</span></td>
+                        <td><button class="btn btn-danger btn-sm d-block mx-auto deleteButton"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                     <tr>
                         <td>The Hacker Ethic: A Radical Approach to the Philosophy of Business</td>
                         <td>Random House Publishing Group</td>
-                        <td><span class="badge bg-primary">1999</span></td>
+                        <td><span class="badge bg-primary d-block mx-auto">1999</span></td>
+                        <td><button class="btn btn-danger btn-sm d-block mx-auto deleteButton"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                     <tr>
                         <td>Linux - Praktický průvodce</td>
                         <td>Computer Press</td>
-                        <td><span class="badge bg-primary">1997</span></td>
+                        <td><span class="badge bg-primary d-block mx-auto">1997</span></td>
+                        <td><button class="btn btn-danger btn-sm d-block mx-auto deleteButton"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                     <tr>
                         <td>Leaders in Computing: Changing the digital world</td>
                         <td>BCS, The Chartered Institute for IT</td>
-                        <td><span class="badge bg-primary">2011</span></td>
+                        <td><span class="badge bg-primary d-block mx-auto">2011</span></td>
+                        <td><button class="btn btn-danger btn-sm d-block mx-auto deleteButton"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                 </tbody>
             </table>
         </section>
+
+        <div class="mt-10" id="bookForm">
+            <h3>Add a new book</h3>
+            <form id="addBookForm">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Title"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="publisher">Publisher</label>
+                    <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Publisher"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="year">Year</label>
+                    <input type="number" class="form-control" id="year" name="year" min="1900" placeholder="Year"/>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary mt-2"><i class="fas fa-plus"></i> Add</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-10" id="removeBookForm">
+            <h3>Remove a book by Number</h3>
+            <form id="removeBookByNumberForm" onsubmit="removeBookByNumber(event)">
+                <div class="mb-3">
+                    <label class="form-label" for="bookNumber">Number</label>
+                    <input type="number" class="form-control" id="bookNumber" name="bookNumber" placeholder="Number"/>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-danger mt-2"><i class="fas fa-trash"></i> Remove</button>
+                </div>
+            </form>
+        </div>
     </main>
-    <footer class="bg-black text-center p-5 mt-2 text-white">
+    <footer class="bg-black text-center p-5 mt-5 text-white">
         <p>2024 - Web Application - Unical - All Rights Reserved</p>
     </footer>
 </body>
