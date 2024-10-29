@@ -37,16 +37,14 @@ function validate(title, publisher, year) {
 
 function addNewBook(tbody, title, publisher, year) {
     console.log("Inserting new book with method 1");
+    const newRow = tbody.insertRow();
     const newBook = `
-        <tr>
-            <td>${title}</td>
-            <td>${publisher}</td>
-            <td><span class="badge bg-primary d-block mx-auto">${year}</span></td>
-            <td><button class="btn btn-danger btn-sm d-block mx-auto deleteButton" onclick="deleteBook(event)"><i class="fa-solid fa-trash"></i></button></td>
-        </tr>
+        <td>${title}</td>
+        <td>${publisher}</td>
+        <td><span class="badge bg-primary d-block mx-auto">${year}</span></td>
+        <td><button class="btn btn-danger btn-sm d-block mx-auto deleteButton" onclick="deleteBook(event)"><i class="fa-solid fa-trash"></i></button></td>
     `;
-
-    tbody.innerHTML += newBook;
+    newRow.innerHTML += newBook;
 }
 
 function addNewBook2(tbody, title, publisher, year) {
