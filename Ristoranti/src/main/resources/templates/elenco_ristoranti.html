@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/generics.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script language="javascript" src="/js/gestioneRistoranti.js"></script>
+    <title>Elenco Ristornati</title>
+</head>
+<body class="container bg-dark text-white">
+<header id="firstheader">
+    <figure class="figure">
+        <img class="figure-img img-fluid rounded-circle" src="/images/logo.png" alt="logo"/>
+    </figure>
+    <h1>Ristoranti</h1>
+    <nav class="mt-3 navbar navbar-expand-sm navbar-dark bg-primary">
+        <div class="container-fluid justify-content-center">
+            <ul class="navbar-nav">
+                <li class="voicemenu nav-item"><a class="nav-link text-uppercase fw-bold px-3" href="/">Home</a></li>
+                <li class="voicemenu nav-item"><a class="nav-link text-uppercase fw-bold px-3" aria-current="page"
+                                                  href="/about.html">Chi siamo</a></li>
+                <li class="voicemenu nav-item"><a class="nav-link text-uppercase active fw-bold px-3" href="#">Elenco
+                    Ristoranti</a></li>
+                <li class="voicemenu nav-item"><a class="nav-link text-uppercase fw-bold px-3"
+                                                  href="/login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<table class="table table-dark table-striped table-bordered align-middle">
+    <thead class="table-light border-dark">
+    <tr>
+        <th>Nome</th>
+        <th>Descrizione</th>
+        <th>Ubicazione</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider" id="tabellaRistorante">
+    <tr th:each="rist : ${ristoranti}">
+        <td th:text="${rist.nome}"></td>
+        <td th:text="${rist.descrizione}"></td>
+        <td th:text="${rist.ubicazione}"></td>
+    </tr>
+    <!--tr>
+        <td>Fratelli La Frode</td>
+        <td>Pizzeria</td>
+        <td>Rende</td>
+    </tr-->
+    </tbody>
+</table>
+<form>
+    <div class="mb-3">
+        <label class="form-label" for="nome_rist">Nome Ristorante:</label>
+        <input class="form-control" id="nome_rist" type="text" name="nome_ristorante"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="desc_rist">Descrizione Ristorante:</label>
+        <textarea class="form-control" id="desc_rist" placeholder="Inserisci la descrizione"
+                  name="descrizione_ristorante"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="ub_ristorante">Ubicazione Ristorante:</label>
+        <select class="form-select" id="ub_ristorante" name="ubicazione_ristorante">
+            <option value="---" selected>---</option>
+            <option value="Rende">Rende</option>
+            <option value="Cosenza">Cosenza</option>
+            <option value="Castrolibero">Castrolibero</option>
+        </select>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
+        <input id="btn_aggiungi" type="button" class="btn btn-success" value="Aggiungi Ristorante alla lista"/>
+        <input type="reset" class="btn btn-danger"/>
+    </div>
+</form>
+</body>
+</html>
