@@ -1,5 +1,6 @@
 package it.unical.demacs.informatica.ristoranti.controller;
 
+import it.unical.demacs.informatica.ristoranti.exception.PiattoNotValidException;
 import it.unical.demacs.informatica.ristoranti.model.Piatto;
 import it.unical.demacs.informatica.ristoranti.service.IPiattoService;
 import org.springframework.http.HttpStatusCode;
@@ -33,19 +34,18 @@ public class PiattoController {
     }
 
     @RequestMapping(value = "/addPiatto", method = RequestMethod.POST)
-    ResponseEntity<Piatto> postCreateNewPiatto(@RequestBody Piatto piatto) throws RuntimeException {
+    ResponseEntity<Piatto> postCreateNewPiatto(@RequestBody Piatto piatto) throws Exception {
         try {
             return ResponseEntity.ok(
                     this.piattoService.createPiatto(piatto)
             );
-        } catch (RuntimeException e) {
-            // TODO custom error
+        } catch (PiattoNotValidException e) {
             return ResponseEntity.status(HttpStatusCode.valueOf(400)).build();
         }
     }
 
     @RequestMapping(value = "/updatePiatto/{nomePiatto}", method = RequestMethod.POST)
-    ResponseEntity<Piatto> postUpdateNewPiatto(@PathVariable String nomePiatto, @RequestBody Piatto piatto) {
+    ResponseEntity<Piatto> postUpdateNewPiatto(@PathVariable String nomePiatto, @RequestBody Piatto piatto) throws Exception {
         return ResponseEntity.ok(
                 this.piattoService.updatePiatto(nomePiatto, piatto)
         );
