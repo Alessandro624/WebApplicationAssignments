@@ -1,5 +1,6 @@
 package it.unical.demacs.informatica.ristoranti.service;
 
+import it.unical.demacs.informatica.ristoranti.exception.PiattoNotValidException;
 import it.unical.demacs.informatica.ristoranti.model.Piatto;
 import it.unical.demacs.informatica.ristoranti.persistence.DAO.PiattoDAO;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,10 @@ public class PiattoService implements IPiattoService {
     }
 
     @Override
-    public Piatto createPiatto(Piatto piatto) {
+    public Piatto createPiatto(Piatto piatto) throws Exception {
         // verify that not exists a Piatto with the same name
         if (piattoDAO.findByPrimaryKey(piatto.getNome()) != null) {
-            throw new RuntimeException("Already exists a Piatto with the same name! " + piatto.getNome());
+            throw new Exception("Already exists a Piatto with the same name! " + piatto.getNome());
         }
         // verify that Piatto is consistent
         checkPiattoIsValid(piatto);
@@ -42,22 +43,22 @@ public class PiattoService implements IPiattoService {
         return piattoDAO.findByPrimaryKey(piatto.getNome());
     }
 
-    private void checkPiattoIsValid(Piatto piatto) {
+    private void checkPiattoIsValid(Piatto piatto) throws PiattoNotValidException {
         if (piatto == null) {
-            throw new RuntimeException("Piatto must be not null");
+            throw new PiattoNotValidException("Piatto must be not null");
         }
         if (piatto.getNome() == null || piatto.getNome().isEmpty()) {
-            throw new RuntimeException("Piatto.nome must be not null and not empty");
+            throw new PiattoNotValidException("Piatto.nome must be not null and not empty");
         }
     }
 
     @Override
-    public Piatto updatePiatto(String nome, Piatto piatto) {
+    public Piatto updatePiatto(String nome, Piatto piatto) throws Exception {
         piatto.setNome(nome);
         checkPiattoIsValid(piatto);
         // verify that exists a Piatto with the same name
         if (piattoDAO.findByPrimaryKey(piatto.getNome()) == null) {
-            throw new RuntimeException("Not exists a Piatto with the same name! " + piatto.getNome());
+            throw new Exception("Not exists a Piatto with the same name! " + piatto.getNome());
         }
         piattoDAO.save(piatto);
         return piattoDAO.findByPrimaryKey(piatto.getNome());

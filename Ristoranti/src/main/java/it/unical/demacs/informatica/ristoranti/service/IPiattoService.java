@@ -13,10 +13,10 @@ public interface IPiattoService {
     Piatto findById(String nome);
 
     // create
-    Piatto createPiatto(Piatto piatto);
+    Piatto createPiatto(Piatto piatto) throws Exception;
 
     // update
-    Piatto updatePiatto(String nome, Piatto piatto);
+    Piatto updatePiatto(String nome, Piatto piatto) throws Exception;
 
     // delete
     void deletePiatto(String nome);
