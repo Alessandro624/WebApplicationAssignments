@@ -10,9 +10,10 @@ import java.util.List;
 @Service
 public class PiattoService implements IPiattoService {
 
-    // opzione auto wiring 1
+    /* opzione auto wiring 1
     // @Autowired
     // private PiattoDAO dao;
+    */
 
     // opzione auto wiring 2
     private final PiattoDAO piattoDAO;
@@ -28,19 +29,19 @@ public class PiattoService implements IPiattoService {
 
     @Override
     public Piatto findById(String nome) {
-        return piattoDAO.findByPrimaryKey(nome);
+        return this.piattoDAO.findByPrimaryKey(nome);
     }
 
     @Override
     public Piatto createPiatto(Piatto piatto) throws Exception {
         // verify that not exists a Piatto with the same name
-        if (piattoDAO.findByPrimaryKey(piatto.getNome()) != null) {
+        if (this.piattoDAO.findByPrimaryKey(piatto.getNome()) != null) {
             throw new Exception("Already exists a Piatto with the same name! " + piatto.getNome());
         }
         // verify that Piatto is consistent
         checkPiattoIsValid(piatto);
-        piattoDAO.save(piatto);
-        return piattoDAO.findByPrimaryKey(piatto.getNome());
+        this.piattoDAO.save(piatto);
+        return this.piattoDAO.findByPrimaryKey(piatto.getNome());
     }
 
     private void checkPiattoIsValid(Piatto piatto) throws PiattoNotValidException {
@@ -57,16 +58,15 @@ public class PiattoService implements IPiattoService {
         piatto.setNome(nome);
         checkPiattoIsValid(piatto);
         // verify that exists a Piatto with the same name
-        if (piattoDAO.findByPrimaryKey(piatto.getNome()) == null) {
+        if (this.piattoDAO.findByPrimaryKey(piatto.getNome()) == null) {
             throw new Exception("Not exists a Piatto with the same name! " + piatto.getNome());
         }
-        piattoDAO.save(piatto);
-        return piattoDAO.findByPrimaryKey(piatto.getNome());
+        this.piattoDAO.save(piatto);
+        return this.piattoDAO.findByPrimaryKey(piatto.getNome());
     }
 
     @Override
     public void deletePiatto(String nome) {
-        // TODO modify DAO non istanza ma nome
-        piattoDAO.delete(piattoDAO.findByPrimaryKey(nome));
+        this.piattoDAO.delete(nome);
     }
 }

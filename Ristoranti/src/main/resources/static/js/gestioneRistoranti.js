@@ -3,8 +3,8 @@ window.addEventListener('load', () => {
 })
 
 function aggiungiRistorante() {
-    const txtNome = document.querySelector('#nome_rist');
-    const txtDescrizione = document.querySelector('#desc_rist');
+    const txtNome = document.querySelector('#nome_ristorante');
+    const txtDescrizione = document.querySelector('#desc_ristorante');
     const txtUbicazione = document.querySelector('#ub_ristorante');
     const nome = txtNome.value;
     const descrizione = txtDescrizione.value;
