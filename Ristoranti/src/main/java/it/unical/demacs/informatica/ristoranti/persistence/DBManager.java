@@ -35,7 +35,7 @@ public class DBManager {
 
     public PiattoDAO getPiattoDAO() {
         if (piattoDAO == null)
-            piattoDAO = new PiattoDAOJDBC(getConnection());
+            piattoDAO = new PiattoDAOJDBC();
         return piattoDAO;
     }
 
