@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/api/piatto/v1/")
+@RequestMapping("/api/piatto/v1")
 public class PiattoController {
     private final IPiattoService piattoService;
 
@@ -52,7 +52,7 @@ public class PiattoController {
     }
 
     @RequestMapping(value = "/removePiatto/{nomePiatto}", method = RequestMethod.DELETE)
-    ResponseEntity<Void> postDeleteNewPiatto(@PathVariable String nomePiatto) {
+    ResponseEntity<Void> deleteNewPiatto(@PathVariable String nomePiatto) {
         this.piattoService.deletePiatto(nomePiatto);
         return ResponseEntity.ok().build();
     }

@@ -28,7 +28,7 @@ public class ElencoRistoranti extends HttpServlet {
         if (username != null) {
             // dopo la query al database
             List<Ristorante> ristoranti = new ArrayList<>();
-            Ristorante r1 = new Ristorante("Le Casette di Zio Santino", "Ristornate/Pizzeria", "Rende");
+            Ristorante r1 = new Ristorante("Le Casette di Zio Santino", "Ristorate/Pizzeria", "Rende");
             ristoranti.add(r1);
             Ristorante r2 = new Ristorante("Fratelli La Frode", "Pizzeria", "Rende");
             ristoranti.add(r2);

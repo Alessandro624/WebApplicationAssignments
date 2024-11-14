@@ -92,13 +92,13 @@ public class PiattoDAOJDBC implements PiattoDAO {
     }
 
     @Override
-    public void delete(Piatto piatto) {
+    public void delete(String nome) {
         String query = "DELETE FROM piatto WHERE nome = ?";
         try {
             PreparedStatement st = connection.prepareStatement(query);
-            st.setString(1, piatto.getNome());
+            st.setString(1, nome);
             st.executeUpdate();
-            resetRelationInJoinTable(piatto.getNome());
+            resetRelationInJoinTable(nome);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

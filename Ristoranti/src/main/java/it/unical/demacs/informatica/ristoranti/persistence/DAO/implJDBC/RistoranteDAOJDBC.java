@@ -5,17 +5,19 @@ import it.unical.demacs.informatica.ristoranti.model.Ristorante;
 import it.unical.demacs.informatica.ristoranti.persistence.DAO.PiattoDAO;
 import it.unical.demacs.informatica.ristoranti.persistence.DAO.RistoranteDAO;
 import it.unical.demacs.informatica.ristoranti.persistence.DBManager;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class RistoranteDAOJDBC implements RistoranteDAO {
 
     private final Connection connection;
 
-    public RistoranteDAOJDBC(Connection conn) {
-        this.connection = conn;
+    public RistoranteDAOJDBC() {
+        this.connection = DBManager.getInstance().getConnection();
     }
 
     @Override
@@ -26,8 +28,8 @@ public class RistoranteDAOJDBC implements RistoranteDAO {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                Ristorante rist = new RistoranteProxy(rs.getString("nome"), rs.getString("descrizione"), rs.getString("ubicazione"));
-                ristoranti.add(rist);
+                Ristorante ristorante = new RistoranteProxy(rs.getString("nome"), rs.getString("descrizione"), rs.getString("ubicazione"));
+                ristoranti.add(ristorante);
             }
         } catch (SQLException sqlException) {
             throw new RuntimeException(sqlException);
@@ -91,13 +93,13 @@ public class RistoranteDAOJDBC implements RistoranteDAO {
     }
 
     @Override
-    public void delete(Ristorante ristorante) {
+    public void delete(String nome) {
         String query = "DELETE FROM ristorante WHERE nome = ?";
         try {
             PreparedStatement st = connection.prepareStatement(query);
-            st.setString(1, ristorante.getNome());
+            st.setString(1, nome);
             st.executeUpdate();
-            resetRelationInJoinTable(ristorante.getNome());
+            resetRelationInJoinTable(nome);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -123,7 +125,7 @@ public class RistoranteDAOJDBC implements RistoranteDAO {
     }
 
     public static void main(String[] args) {
-        RistoranteDAO ristoranteDAO = new RistoranteDAOJDBC(DBManager.getInstance().getConnection());
+        RistoranteDAO ristoranteDAO = new RistoranteDAOJDBC();
         List<Ristorante> ristoranti = ristoranteDAO.findAll();
         for (Ristorante ristorante : ristoranti) {
             System.out.println(ristorante);

@@ -41,7 +41,7 @@ public class DBManager {
 
     public RistoranteDAO getRistoranteDAO() {
         if (ristoranteDAO == null)
-            ristoranteDAO = new RistoranteDAOJDBC(getConnection());
+            ristoranteDAO = new RistoranteDAOJDBC();
         return ristoranteDAO;
     }
 }
