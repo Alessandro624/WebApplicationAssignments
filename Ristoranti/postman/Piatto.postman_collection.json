@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "b49f1a30-2146-499c-8624-7714b7476a42",
+		"name": "Piatto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39487144"
+	},
+	"item": [
+		{
+			"name": "list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/piatto/v1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"piatto",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/piatto/v1/Piatto12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"piatto",
+						"v1",
+						"Piatto12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePiatto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Piatto13\",\r\n    \"ingredienti\": \"Ing13\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/piatto/v1/addPiatto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"piatto",
+						"v1",
+						"addPiatto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePiatto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Piatto13\",\r\n    \"ingredienti\": \"Ing13-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/piatto/v1/updatePiatto/Piatto13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"piatto",
+						"v1",
+						"updatePiatto",
+						"Piatto13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePiatto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/piatto/v1/removePiatto/Piatto13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"piatto",
+						"v1",
+						"removePiatto",
+						"Piatto13"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
