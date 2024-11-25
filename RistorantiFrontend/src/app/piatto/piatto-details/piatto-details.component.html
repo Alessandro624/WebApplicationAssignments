@@ -1,0 +1,21 @@
+@if (loading) {
+  <app-loading></app-loading>
+} @else {
+  @if (piatto) {
+    <form>
+      <div class="mb-3">
+        <label class="form-label" for="nome_piatto">Nome Piatto:</label>
+        <input class="form-control" id="nome_piatto" type="text" [(ngModel)]="piatto.nome" name="nome" disabled/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="ingredienti_piatto">Ingredienti Piatto:</label>
+        <textarea class="form-control" id="ingredienti_piatto" [(ngModel)]="piatto.ingredienti"
+                  name="ingredienti"></textarea>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
+        <input id="btn_aggiungi" type="button" class="btn btn-success" value="Modifica Piatto"
+               (click)="onUpdate()"/>
+      </div>
+    </form>
+  }
+}

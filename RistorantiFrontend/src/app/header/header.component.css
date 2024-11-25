@@ -1,0 +1,27 @@
+#first-header {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+header img {
+  border-radius: 50%;
+}
+
+.voice-menu .nav-link {
+  transition: background-color 0.3s, border-bottom 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.voice-menu .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Sfondo leggermente scuro al passaggio del mouse */
+  border-bottom: 2px solid; /* Bordo inferiore per effetto sottolineatura */
+}
+
+.voice-menu .nav-link.active {
+  border-bottom: 2px solid; /* Evidenzia il link attivo */
+}
+
+.voice-menu {
+  padding: 10px 15px;
+}

@@ -1,0 +1,37 @@
+<table class="table table-dark table-striped table-bordered align-middle">
+  <thead class="table-light border-dark">
+  <tr>
+    <th>Nome</th>
+    <th>Ingredienti</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider" id="tabellaPiatto">
+    @for (piatto of piatti; track piatto.nome) {
+      <tr>
+        <td><a routerLink="{{piatto.nome}}">{{ piatto.nome }}</a></td>
+        <td>{{ piatto.ingredienti }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm d-block mx-auto" (click)="onRemove(piatto.nome)"><i
+            class="fa-solid fa-trash"></i></button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+<form>
+  <div class="mb-3">
+    <label class="form-label" for="nome_piatto">Nome Piatto:</label>
+    <input class="form-control" id="nome_piatto" type="text" [(ngModel)]="piatto.nome" name="nome"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="ingredienti_piatto">Ingredienti Piatto:</label>
+    <textarea class="form-control" id="ingredienti_piatto" placeholder="Inserisci gli ingredienti"
+              [(ngModel)]="piatto.ingredienti" name="ingredienti"></textarea>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
+    <input id="btn_aggiungi" type="button" class="btn btn-success" (click)="onSave()"
+           value="Aggiungi Piatto alla lista"/>
+    <input type="reset" class="btn btn-danger"/>
+  </div>
+</form>
