@@ -1,0 +1,40 @@
+<table class="table table-dark table-striped table-bordered align-middle">
+  <thead class="table-light border-dark">
+  <tr>
+    <th>Nome</th>
+    <th>Descrizione</th>
+    <th>Ubicazione</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider" id="tabellaRistorante">
+  <tr>
+    <td>Fratelli La Frode</td>
+    <td>Pizzeria</td>
+    <td>Rende</td>
+  </tr>
+  </tbody>
+</table>
+<form>
+  <div class="mb-3">
+    <label class="form-label" for="nome_ristorante">Nome Ristorante:</label>
+    <input class="form-control" id="nome_ristorante" type="text" name="nome_ristorante"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="desc_ristorante">Descrizione Ristorante:</label>
+    <textarea class="form-control" id="desc_ristorante" placeholder="Inserisci la descrizione"
+              name="descrizione_ristorante"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="ub_ristorante">Ubicazione Ristorante:</label>
+    <select class="form-select" id="ub_ristorante" name="ubicazione_ristorante">
+      <option value="---" selected>---</option>
+      <option value="Rende">Rende</option>
+      <option value="Cosenza">Cosenza</option>
+      <option value="Castrolibero">Castrolibero</option>
+    </select>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
+    <input id="btn_aggiungi" type="button" class="btn btn-success" value="Aggiungi Ristorante alla lista"/>
+    <input type="reset" class="btn btn-danger"/>
+  </div>
+</form>
