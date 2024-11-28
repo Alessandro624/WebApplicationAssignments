@@ -21,13 +21,11 @@ export class RistoranteService {
   }
 
   saveNewRistorante(ristorante: Ristorante): Observable<Ristorante> {
-    // @ts-ignore
-    return this.http.post(this.API_BASE_URL + "addRistorante", ristorante);
+    return this.http.post<Ristorante>(this.API_BASE_URL + "addRistorante", ristorante);
   }
 
   updateRistorante(ristorante: Ristorante): Observable<Ristorante> {
-    // @ts-ignore
-    return this.http.post(this.API_BASE_URL + "updateRistorante/" + ristorante.nome, ristorante);
+    return this.http.post<Ristorante>(this.API_BASE_URL + "updateRistorante/" + ristorante.nome, ristorante);
   }
 
   removeRistorante(nomeRistorante: string) {

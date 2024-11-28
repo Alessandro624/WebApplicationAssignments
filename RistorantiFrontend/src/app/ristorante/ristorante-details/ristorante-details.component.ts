@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Ristorante} from '../../models/ristorante/ristorante.module';
 import {RistoranteService} from '../ristorante.service';
 import {FormsModule} from '@angular/forms';
@@ -19,7 +19,7 @@ export class RistoranteDetailsComponent implements OnInit {
   ristorante!: Ristorante;
   loading = false;
 
-  constructor(private _ristoranteService: RistoranteService, private _router: Router, private _activatedRoute: ActivatedRoute) {
+  constructor(private _ristoranteService: RistoranteService, private _activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {

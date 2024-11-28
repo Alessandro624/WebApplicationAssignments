@@ -22,13 +22,11 @@ export class PiattoService {
   }
 
   saveNewPiatto(piatto: Piatto): Observable<Piatto> {
-    // @ts-ignore
-    return this.http.post(this.API_BASE_URL + "addPiatto", piatto);
+    return this.http.post<Piatto>(this.API_BASE_URL + "addPiatto", piatto);
   }
 
   updatePiatto(piatto: Piatto): Observable<Piatto> {
-    // @ts-ignore
-    return this.http.post(this.API_BASE_URL + "updatePiatto/" + piatto.nome, piatto);
+    return this.http.post<Piatto>(this.API_BASE_URL + "updatePiatto/" + piatto.nome, piatto);
   }
 
   removePiatto(nomePiatto: string) {

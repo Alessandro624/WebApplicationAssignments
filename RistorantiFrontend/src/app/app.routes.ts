@@ -6,14 +6,15 @@ import {PiattoDetailsComponent} from './piatto/piatto-details/piatto-details.com
 import {AboutComponent} from './about/about.component';
 import {LoginComponent} from './login/login.component';
 import {RistoranteDetailsComponent} from './ristorante/ristorante-details/ristorante-details.component';
+import {authenticationGuard} from './authentication.guard';
 
 export const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'ristorante', component: RistorantiHomeComponent},
-  {path: 'piatto', component: PiattiHomeComponent},
-  {path: 'about', component: AboutComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'piatto/:nome', component: PiattoDetailsComponent},
-  {path: 'ristorante/:nome', component: RistoranteDetailsComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'ristorante', component: RistorantiHomeComponent, canActivate: [authenticationGuard]},
+  {path: 'piatto', component: PiattiHomeComponent, canActivate: [authenticationGuard]},
+  {path: 'piatto/:nome', component: PiattoDetailsComponent, canActivate: [authenticationGuard]},
+  {path: 'ristorante/:nome', component: RistoranteDetailsComponent, canActivate: [authenticationGuard]},
 ];

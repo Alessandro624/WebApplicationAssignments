@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LoadingComponent} from '../../common/loading/loading.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Piatto} from '../../models/piatto/piatto.module';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {PiattoService} from '../piatto.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class PiattoDetailsComponent implements OnInit {
   piatto!: Piatto;
   loading = false;
 
-  constructor(private _piattoService: PiattoService, private _router: Router, private _activatedRoute: ActivatedRoute) {
+  constructor(private _piattoService: PiattoService, private _activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
