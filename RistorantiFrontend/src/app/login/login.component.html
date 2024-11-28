@@ -1,11 +1,11 @@
 <form id="loginForm" method="POST">
   <div class="mb-3">
     <label class="form-label" for="user">Username:</label>
-    <input class="form-control" type="text" id="user" name="username"/>
+    <input class="form-control" type="text" id="user" [(ngModel)]="username" name="username" required/>
   </div>
   <div class="mb-3">
     <label class="form-label" for="password">Password:</label>
-    <input class="form-control" type="password" id="password" name="password"/>
+    <input class="form-control" type="password" id="password" [(ngModel)]="password" name="password" required/>
   </div>
-  <input class="btn btn-primary" type="submit"/>
+  <input class="btn btn-primary" type="submit" (click)="onLogin()"/>
 </form>

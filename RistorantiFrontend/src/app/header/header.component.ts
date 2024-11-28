@@ -1,15 +1,41 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {AuthenticationService} from '../login/authentication.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  isAuthenticated!: boolean;
+
+  constructor(private _authenticationService: AuthenticationService) {
+  }
+
+  ngOnInit(): void {
+    this._authenticationService.updateAuthentication();
+    this._authenticationService.isAuthenticated$.subscribe(value => this.isAuthenticated = value);
+  }
+
+  logout() {
+    this._authenticationService.onLogout().subscribe(
+      data => {
+        console.log(data);
+        if (data == "Logout successful") {
+          console.log("Logout successful");
+        }
+        this._authenticationService.updateAuthentication();
+      },
+      error => {
+        console.log(error);
+        this._authenticationService.updateAuthentication();
+      }
+    );
+  }
 }
