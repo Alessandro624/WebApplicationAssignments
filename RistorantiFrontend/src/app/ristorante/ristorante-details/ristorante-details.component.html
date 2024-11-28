@@ -1,0 +1,31 @@
+@if (loading) {
+  <app-loading></app-loading>
+} @else {
+  @if (ristorante) {
+    <form>
+      <div class="mb-3">
+        <label class="form-label" for="nome_ristorante">Nome Ristorante:</label>
+        <input class="form-control" id="nome_ristorante" type="text" [(ngModel)]="ristorante.nome" name="nome"
+               disabled/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="desc_ristorante">Descrizione Ristorante:</label>
+        <textarea class="form-control" id="desc_ristorante" [(ngModel)]="ristorante.descrizione"
+                  name="descrizione"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="ub_ristorante">Ubicazione Ristorante:</label>
+        <select class="form-select" id="ub_ristorante" [(ngModel)]="ristorante.ubicazione" name="ubicazione">
+          <option value="---" selected>---</option>
+          <option value="Rende">Rende</option>
+          <option value="Cosenza">Cosenza</option>
+          <option value="Castrolibero">Castrolibero</option>
+        </select>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
+        <input id="btn_aggiungi" type="button" class="btn btn-success" value="Modifica Ristorante"
+               (click)="onUpdate()"/>
+      </div>
+    </form>
+  }
+}
