@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthenticationService} from '../login/authentication.service';
 
 @Component({
@@ -15,7 +15,7 @@ import {AuthenticationService} from '../login/authentication.service';
 export class HeaderComponent implements OnInit {
   isAuthenticated!: boolean;
 
-  constructor(private _authenticationService: AuthenticationService) {
+  constructor(private _authenticationService: AuthenticationService, private _router: Router) {
   }
 
   ngOnInit(): void {
@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
         console.log(data);
         if (data == "Logout successful") {
           console.log("Logout successful");
+          this._router.navigate(['/']);
         }
         this._authenticationService.updateAuthentication();
       },
