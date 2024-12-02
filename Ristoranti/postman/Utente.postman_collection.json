@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "6b1c1fcd-ae8b-4e89-9874-5a051a634e5f",
+		"name": "Utente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39487144"
+	},
+	"item": [
+		{
+			"name": "createUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user@\",\r\n    \"password\": \"pass\",\r\n    \"role\": \"USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/open/v1/createUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"open",
+						"v1",
+						"createUser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

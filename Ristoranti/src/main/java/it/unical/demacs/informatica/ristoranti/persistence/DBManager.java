@@ -2,8 +2,10 @@ package it.unical.demacs.informatica.ristoranti.persistence;
 
 import it.unical.demacs.informatica.ristoranti.persistence.DAO.PiattoDAO;
 import it.unical.demacs.informatica.ristoranti.persistence.DAO.RistoranteDAO;
+import it.unical.demacs.informatica.ristoranti.persistence.DAO.UserDAO;
 import it.unical.demacs.informatica.ristoranti.persistence.DAO.implJDBC.PiattoDAOJDBC;
 import it.unical.demacs.informatica.ristoranti.persistence.DAO.implJDBC.RistoranteDAOJDBC;
+import it.unical.demacs.informatica.ristoranti.persistence.DAO.implJDBC.UserDAOJDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +16,7 @@ public class DBManager {
     private Connection con = null;
     private RistoranteDAO ristoranteDAO = null;
     private PiattoDAO piattoDAO = null;
+    private UserDAO userDAO = null;
 
     private DBManager() {
     }
@@ -43,5 +46,11 @@ public class DBManager {
         if (ristoranteDAO == null)
             ristoranteDAO = new RistoranteDAOJDBC();
         return ristoranteDAO;
+    }
+
+    public UserDAO getUserDAO() {
+        if (userDAO == null)
+            userDAO = new UserDAOJDBC();
+        return userDAO;
     }
 }
