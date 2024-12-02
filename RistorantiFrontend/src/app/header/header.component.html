@@ -20,9 +20,10 @@
                                              routerLinkActive="active">Elenco Ristoranti</a></li>
           <li class="voice-menu nav-item"><a class="nav-link text-uppercase fw-bold px-3" routerLink="/piatto"
                                              routerLinkActive="active">Elenco Piatti</a></li>
-          <li class="voice-menu nav-item"><a class="nav-link text-uppercase fw-bold px-3"
-                                             routerLink="/login" routerLinkActive="active">Login</a></li>
-          @if (isAuthenticated) {
+          @if (!user) {
+            <li class="voice-menu nav-item"><a class="nav-link text-uppercase fw-bold px-3"
+                                               routerLink="/login" routerLinkActive="active">Login</a></li>
+          } @else {
             <li class="voice-menu nav-item"><a class="nav-link text-uppercase fw-bold px-3"
                                                (click)="logout()">Logout</a>
               }

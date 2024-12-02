@@ -13,29 +13,25 @@ import {AuthenticationService} from '../login/authentication.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  isAuthenticated!: boolean;
+  user!: any;
 
   constructor(private _authenticationService: AuthenticationService, private _router: Router) {
   }
 
   ngOnInit(): void {
-    this._authenticationService.updateAuthentication();
-    this._authenticationService.isAuthenticated$.subscribe(value => this.isAuthenticated = value);
+    this._authenticationService.currentUser$.subscribe({
+      next: data => {
+        console.log(data);
+        this.user = data;
+      }, error: error => console.log(error)
+    })
   }
 
   logout() {
     this._authenticationService.onLogout().subscribe(
-      data => {
-        console.log(data);
-        if (data == "Logout successful") {
-          console.log("Logout successful");
-          this._router.navigate(['/']);
-        }
-        this._authenticationService.updateAuthentication();
-      },
-      error => {
-        console.log(error);
-        this._authenticationService.updateAuthentication();
+      () => {
+        alert(`Logout successfully `);
+        this._router.navigate(['/']).then(() => console.log("Logout successfully" + this.user));
       }
     );
   }

@@ -21,16 +21,12 @@ export class LoginComponent {
 
   onLogin() {
     this._authenticationService.onLogin(this.username, this.password).subscribe(
-      data => {
-        console.log(data);
-        if (data == "Login successful") {
-          this._router.navigate(['/']).then(error => console.log(error));
-        }
-        this._authenticationService.updateAuthentication();
+      () => {
+        console.log("Logged user");
+        this._router.navigate(['/']).then(error => console.log(error));
       },
       error => {
         console.log(error);
-        this._authenticationService.updateAuthentication();
       }
     );
   }

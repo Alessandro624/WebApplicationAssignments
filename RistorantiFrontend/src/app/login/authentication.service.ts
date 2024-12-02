@@ -1,40 +1,86 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, catchError, of, switchMap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private isAuthenticatedSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();
+  /*private isAuthenticatedSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();*/
+  // Stream reattivo per i dati dell'utente
+  private currentUserSubject = new BehaviorSubject<any | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
+  // private myAPIUrl = "api/personal";
+  private APIUrl = "api";
 
   constructor(private http: HttpClient) {
   }
 
-  updateAuthentication() {
-    this.isAuthenticated().subscribe(
-      data => {
-        this.isAuthenticatedSubject$.next(data);
-      },
-      error => {
-        console.log(error);
-        this.isAuthenticatedSubject$.next(false);
-      }
-    );
-  }
-
+  /*
+    updateAuthentication() {
+      this.isAuthenticated().subscribe(
+        data => {
+          this.isAuthenticatedSubject$.next(data);
+        },
+        error => {
+          console.log(error);
+          this.isAuthenticatedSubject$.next(false);
+        }
+      );
+    }
+  */
   onLogin(username: string, password: string) {
-    const encodedUsername = btoa(username);
+    const body = new URLSearchParams();
+    body.set('username', username);
+    body.set('password', password);
+    return this.http.post<void>(`${this.APIUrl}/login`, body.toString(), {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      withCredentials: true, // Per inviare il cookie di sessione
+    }).pipe(
+      switchMap(() => this.getUser()) // Aggiorna l'utente dopo il login
+    );
+    /*const encodedUsername = btoa(username);
     const encodedPassword = btoa(password);
-    return this.http.get<string>(`api/personal/login?username=${encodedUsername}&password=${encodedPassword}`, {withCredentials: true});
+    return this.http.get<string>(this.myAPIUrl + `/login?username=${encodedUsername}&password=${encodedPassword}`, {withCredentials: true});*/
   }
 
   onLogout() {
-    return this.http.get<string>('api/personal/logout', {withCredentials: true});
+    return this.http.post<void>(`${this.APIUrl}/logout`, {}, {withCredentials: true}).pipe(switchMap(() => {
+      this.currentUserSubject.next(null); // Reset utente
+      return of(null);
+    }));
+    // return this.http.get<string>(this.myAPIUrl + '/logout', {withCredentials: true});
   }
 
-  isAuthenticated() {
-    return this.http.get<boolean>('api/personal/isAuthenticated', {withCredentials: true});
+  /*isAuthenticated() {
+    return this.http.get<boolean>(this.myAPIUrl + '/isAuthenticated', {withCredentials: true});
+  }*/
+
+  /**
+   * Recupera l'utente corrente. Se già presente, lo restituisce.
+   * Altrimenti, esegue una chiamata HTTP per verificare l'autenticazione.
+   * @returns Observable dell'utente corrente o null se non autenticato
+   */
+  getUser() {
+    if (this.currentUserSubject.value) {
+      // Se l'utente è già presente, restituisci il valore
+      return of(this.currentUserSubject.value);
+    }
+    // Altrimenti, effettua una chiamata HTTP per recuperare l'utente
+    return this.http.get<any>(this.APIUrl + `/auth/v1/check-user`, {
+      withCredentials: true,
+    }).pipe(
+      switchMap((user) => {
+        // Se l'utente è autenticato, aggiorna il BehaviorSubject
+        this.currentUserSubject.next(user);
+        return of(user);
+      }),
+      catchError(() => {
+        // In caso di errore (es: 401 Unauthorized), restituisci null
+        this.currentUserSubject.next(null);
+        return of(null);
+      })
+    );
   }
 }
