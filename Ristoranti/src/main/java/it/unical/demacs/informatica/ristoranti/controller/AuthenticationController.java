@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Base64;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/personal")
 public class AuthenticationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     ResponseEntity<String[]> login(@RequestParam String username, @RequestParam String password, HttpSession session) {

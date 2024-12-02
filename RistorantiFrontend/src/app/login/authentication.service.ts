@@ -27,14 +27,14 @@ export class AuthenticationService {
   onLogin(username: string, password: string) {
     const encodedUsername = btoa(username);
     const encodedPassword = btoa(password);
-    return this.http.get<string>(`api/login?username=${encodedUsername}&password=${encodedPassword}`, {withCredentials: true});
+    return this.http.get<string>(`api/personal/login?username=${encodedUsername}&password=${encodedPassword}`, {withCredentials: true});
   }
 
   onLogout() {
-    return this.http.get<string>('api/logout', {withCredentials: true});
+    return this.http.get<string>('api/personal/logout', {withCredentials: true});
   }
 
   isAuthenticated() {
-    return this.http.get<boolean>('api/isAuthenticated', {withCredentials: true});
+    return this.http.get<boolean>('api/personal/isAuthenticated', {withCredentials: true});
   }
 }
