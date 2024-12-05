@@ -4,7 +4,12 @@
   padding-bottom: 50px;
 }
 
-header img {
+.carousel {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+header figure img {
   border-radius: 50%;
 }
 

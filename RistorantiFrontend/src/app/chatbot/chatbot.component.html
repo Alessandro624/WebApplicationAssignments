@@ -1,0 +1,55 @@
+<button
+  id="chat-toggle"
+  class="btn btn-primary rounded-circle position-fixed d-flex justify-content-center align-items-center"
+  data-bs-toggle="modal"
+  data-bs-target="#chatModal">
+  <i class="fas fa-comments"></i>
+</button>
+<div
+  class="modal fade"
+  id="chatModal"
+  tabindex="-1"
+  aria-labelledby="chatModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-end">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="chatModalLabel">Chat</h5>
+        <button
+          class="btn-close btn-close-white rounded-circle justify-content-end align-items-end"
+          data-bs-dismiss="modal">
+        </button>
+      </div>
+      <div class="modal-body" #chatBody style="height: 300px; overflow-y: auto;">
+        @for (message of messages; track message) {
+          @if (message.sender === Sender.USER) {
+            <div class="d-flex justify-content-end mb-2">
+              <div class="badge bg-primary text-wrap text-white p-2 rounded shadow-sm">
+                {{ message.text }}
+              </div>
+            </div>
+          } @else if (message.sender === Sender.CHATBOT) {
+            <div class="d-flex justify-content-start mb-2">
+              <div class="badge bg-secondary text-wrap text-white p-2 rounded shadow-sm">
+                {{ message.text }}
+              </div>
+            </div>
+          }
+        }
+      </div>
+      <div class="modal-footer">
+        <input
+          #messageInput
+          type="text"
+          class="form-control"
+          placeholder="Scrivi un messaggio..."
+          [(ngModel)]="newMessage"
+          [disabled]="isBotResponding"
+          (keydown.enter)="sendMessage()"/>
+        <button class="btn btn-primary" [disabled]="isBotResponding" (click)="sendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
