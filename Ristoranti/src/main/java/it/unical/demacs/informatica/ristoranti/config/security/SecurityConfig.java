@@ -1,5 +1,6 @@
 package it.unical.demacs.informatica.ristoranti.config.security;
 
+import it.unical.demacs.informatica.ristoranti.controller.UserDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -21,14 +22,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/login").permitAll() // Accesso senza autenticazione
                         .requestMatchers("/api/open/**").permitAll() // Accesso senza autenticazione
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/auth/**").authenticated() // Richiede autenticazione
                         .anyRequest().authenticated() // Tutte le altre richieste richiedono autenticazione
                 )
                 .exceptionHandling(ex -> ex
-                                // Restituisce 401 Unauthorized per richieste non autorizzate
-                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                         // Restituisce 401 Unauthorized per richieste non autorizzate
-                        // .accessDeniedHandler() //TODO to implement if ROLE exists
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                        // Restituisce 403
+                        .accessDeniedHandler(new UserDeniedHandler())
                 )
                 .formLogin(form -> form
                         .loginProcessingUrl("/api/login") // Endpoint per il login
@@ -46,9 +48,9 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         // Utente hard-coded per test
-        var user = User.withUsername("user@")
+        var user = User.withUsername("admin@")
                 .password(passwordEncoder().encode("pass"))
-                .roles("USER")
+                .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user);
     }

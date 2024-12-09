@@ -13,7 +13,38 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"user@\",\r\n    \"password\": \"pass\",\r\n    \"role\": \"USER\"\r\n}",
+					"raw": "{\r\n    \"username\": \"user@\",\r\n    \"password\": \"pass\",\r\n    \"role\": \"ROLE_USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/open/v1/createUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"open",
+						"v1",
+						"createUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createAdmin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user@\",\r\n    \"password\": \"pass\",\r\n    \"role\": \"ROLE_USER\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
