@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {Piatto} from '../../models/piatto/piatto.module';
+import {Piatto} from '../../models/piatto/piatto.model';
 import {PiattoService} from '../piatto.service';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 
@@ -28,7 +28,7 @@ export class PiattiHomeComponent implements OnInit {
   private onLoadPiatti() {
     this._piattoService.getAllPiatti().subscribe(
       data => {
-        console.log(data);
+        console.log("Piatti caricati: " + data);
         this.piatti = data;
       },
       error => console.log(error)

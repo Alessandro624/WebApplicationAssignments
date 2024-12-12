@@ -17,14 +17,12 @@ import java.util.List;
 public class ElencoRistoranti extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Funziona!");
         /*
         creazione della pagina
         PrintWriter printWriter = resp.getWriter();
         printWriter.println("<html><strong>Funziona</strong></html>");
         */
         String username = (String) req.getSession(true).getAttribute("username");
-        System.out.println("username: " + username);
         if (username != null) {
             // dopo la query al database
             List<Ristorante> ristoranti = new ArrayList<>();

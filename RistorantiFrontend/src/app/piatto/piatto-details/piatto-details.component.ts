@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LoadingComponent} from '../../common/loading/loading.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Piatto} from '../../models/piatto/piatto.module';
+import {Piatto} from '../../models/piatto/piatto.model';
 import {ActivatedRoute} from '@angular/router';
 import {PiattoService} from '../piatto.service';
 

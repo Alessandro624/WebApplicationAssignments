@@ -1,7 +1,6 @@
 package it.unical.demacs.informatica.ristoranti.controller;
 
 import it.unical.demacs.informatica.ristoranti.config.security.SecurityUtility;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,7 @@ import java.util.Objects;
 public class UserDeniedHandler implements AccessDeniedHandler {
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
         System.err.println(
                 "For user:'" + Objects.requireNonNull(SecurityUtility.getCurrentUser()).getUsername() + "' " +
                         "for resource:'" + request.getRequestURI() + "'  error:" + accessDeniedException.getMessage());

@@ -1,5 +1,6 @@
 package it.unical.demacs.informatica.ristoranti.persistence.DAO.implJDBC;
 
+import it.unical.demacs.informatica.ristoranti.model.AuthProvider;
 import it.unical.demacs.informatica.ristoranti.model.UserRole;
 import it.unical.demacs.informatica.ristoranti.model.Utente;
 import it.unical.demacs.informatica.ristoranti.persistence.DAO.UserDAO;
@@ -20,7 +21,7 @@ public class UserDAOJDBC implements UserDAO {
 
     @Override
     public Utente findByPrimaryKey(String username) {
-        String query = "SELECT username, password , role FROM utente WHERE username = ?";
+        String query = "SELECT username, password , role , provider FROM utente WHERE username = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
@@ -28,7 +29,8 @@ public class UserDAOJDBC implements UserDAO {
                 return new Utente(
                         resultSet.getString("username"),
                         resultSet.getString("password"),
-                        UserRole.valueOf(resultSet.getString("role"))
+                        UserRole.valueOf(resultSet.getString("role")),
+                        AuthProvider.valueOf(resultSet.getString("provider"))
                 );
             }
             return null;
@@ -39,11 +41,13 @@ public class UserDAOJDBC implements UserDAO {
 
     @Override
     public void save(Utente utente) {
-        String query = "INSERT INTO utente (username, password , role) VALUES (?, ? , ?) ";
+        String query = "INSERT INTO utente (username, password , role, provider) VALUES (?, ? , ?, ?) "
+                + "ON CONFLICT (username) DO UPDATE SET password = EXCLUDED.password, role = EXCLUDED.role";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, utente.getUsername());
             statement.setString(2, utente.getPassword());
             statement.setString(3, utente.getRole().toString());
+            statement.setString(4, utente.getProvider().toString());
             statement.executeUpdate();
         } catch (SQLException sqlException) {
             throw new RuntimeException(sqlException);

@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.ristoranti.controller;
 
+import it.unical.demacs.informatica.ristoranti.model.AuthProvider;
+import it.unical.demacs.informatica.ristoranti.model.UserRole;
 import it.unical.demacs.informatica.ristoranti.model.Utente;
 import it.unical.demacs.informatica.ristoranti.service.IUserService;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +21,7 @@ public class UtenteController {
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
     public ResponseEntity<Void> createUser(@RequestBody Utente utente) {
-        System.out.println(utente);
-        this.userService.createUser(utente.getUsername(), utente.getPassword(), utente.getRole());
+        this.userService.createUser(utente.getUsername(), utente.getPassword(), UserRole.ROLE_USER, AuthProvider.LOCAL);
         return ResponseEntity.ok().build();
     }
 }

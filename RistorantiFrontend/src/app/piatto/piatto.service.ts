@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Piatto} from '../models/piatto/piatto.module';
+import {Piatto} from '../models/piatto/piatto.model';
 import {HttpClient} from '@angular/common/http'
 import {Observable} from 'rxjs';
 

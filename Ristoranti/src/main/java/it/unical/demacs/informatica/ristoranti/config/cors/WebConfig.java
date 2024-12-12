@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.ristoranti;
+package it.unical.demacs.informatica.ristoranti.config.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

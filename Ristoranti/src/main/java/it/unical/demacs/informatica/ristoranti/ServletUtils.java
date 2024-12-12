@@ -10,7 +10,6 @@ public class ServletUtils {
     @RequestMapping(value = "/views/**", method = {RequestMethod.GET, RequestMethod.POST})
     public String templateHandler(HttpServletRequest request) {
         String resource = request.getRequestURI().substring("/views/".length());
-        System.out.println(resource);
         resource = resource.substring(0, resource.indexOf(".html"));
         return resource;
     }

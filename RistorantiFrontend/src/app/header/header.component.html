@@ -37,6 +37,10 @@
             <li class="voice-menu nav-item"><a class="nav-link text-uppercase fw-bold px-3"
                                                (click)="logout()">Logout</a>
               }
+          @if (user && user.role === UserRole.ADMIN) {
+            <li class="voice-menu nav-item"><a class="nav-link text-uppercase fw-bold px-3" routerLink="/admin-home"
+                                               routerLinkActive="active">Admin</a></li>
+          }
         </ul>
       </div>
     </div>

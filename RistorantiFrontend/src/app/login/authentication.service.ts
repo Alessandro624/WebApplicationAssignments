@@ -8,13 +8,13 @@ import {BehaviorSubject, catchError, of, switchMap} from 'rxjs';
 export class AuthenticationService {
   /*private isAuthenticatedSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();*/
-  // Stream reattivo per i dati dell'utente
-  private currentUserSubject = new BehaviorSubject<any | null>(null);
+  currentUserSubject = new BehaviorSubject<any | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
   // private myAPIUrl = "api/personal";
   private APIUrl = "api";
 
   constructor(private http: HttpClient) {
+    this.getUser().subscribe();
   }
 
   /*
@@ -30,6 +30,7 @@ export class AuthenticationService {
       );
     }
   */
+
   onLogin(username: string, password: string) {
     const body = new URLSearchParams();
     body.set('username', username);
@@ -43,6 +44,19 @@ export class AuthenticationService {
     /*const encodedUsername = btoa(username);
     const encodedPassword = btoa(password);
     return this.http.get<string>(this.myAPIUrl + `/login?username=${encodedUsername}&password=${encodedPassword}`, {withCredentials: true});*/
+  }
+
+  onGoogleLogin(token: string) {
+    return this.http.post<void>(`${this.APIUrl}/open/google-login`, {token}, {withCredentials: true}).pipe(
+      switchMap(() => {
+        console.log('Google login successful, updating user state.');
+        return this.getUser(); // Aggiorna lo stato dell'utente
+      }),
+      catchError((error) => {
+        console.error('Google login failed:', error);
+        return of(null);
+      })
+    );
   }
 
   onLogout() {
@@ -73,6 +87,7 @@ export class AuthenticationService {
     }).pipe(
       switchMap((user) => {
         // Se l'utente è autenticato, aggiorna il BehaviorSubject
+        console.log(user);
         this.currentUserSubject.next(user);
         return of(user);
       }),

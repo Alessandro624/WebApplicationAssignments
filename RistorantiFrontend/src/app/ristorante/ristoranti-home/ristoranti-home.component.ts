@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {FormsModule} from '@angular/forms';
-import {Ristorante} from '../../models/ristorante/ristorante.module';
+import {Ristorante} from '../../models/ristorante/ristorante.model';
 import {RistoranteService} from '../ristorante.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class RistorantiHomeComponent implements OnInit {
   private onLoadRistoranti() {
     this._ristoranteService.getAllRistoranti().subscribe(
       data => {
-        console.log(data);
+        console.log("Ristoranti caricati: " + data);
         this.ristoranti = data;
       },
       error => console.log(error)

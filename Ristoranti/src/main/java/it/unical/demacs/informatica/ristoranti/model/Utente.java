@@ -15,11 +15,13 @@ public class Utente implements UserDetails {
     private String username;
     private String password;
     private UserRole role;
+    private AuthProvider provider;
 
-    public Utente(String username, String password, UserRole role) {
+    public Utente(String username, String password, UserRole role, AuthProvider provider) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.provider = provider;
     }
 
     @Override

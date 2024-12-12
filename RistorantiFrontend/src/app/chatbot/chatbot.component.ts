@@ -1,7 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {Message} from '../models/message/message.module';
-import {Sender} from '../models/message/sender.module';
+import {Message} from '../models/message/message.model';
+import {Sender} from '../models/message/sender.model';
 import {ChatbotService} from './chatbot.service';
 
 @Component({

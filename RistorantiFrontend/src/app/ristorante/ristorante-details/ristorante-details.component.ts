@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Ristorante} from '../../models/ristorante/ristorante.module';
+import {Ristorante} from '../../models/ristorante/ristorante.model';
 import {RistoranteService} from '../ristorante.service';
 import {FormsModule} from '@angular/forms';
 import {LoadingComponent} from '../../common/loading/loading.component';

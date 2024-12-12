@@ -1,5 +1,6 @@
 package it.unical.demacs.informatica.ristoranti.config.security;
 
+import it.unical.demacs.informatica.ristoranti.model.AuthProvider;
 import it.unical.demacs.informatica.ristoranti.model.Utente;
 import it.unical.demacs.informatica.ristoranti.service.IUserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Utente> user = this.userService.getUser(username);
+        Optional<Utente> user = this.userService.getUser(username, AuthProvider.LOCAL);
         return user.orElse(null);
     }
 }
