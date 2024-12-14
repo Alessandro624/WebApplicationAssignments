@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
+import {isPlatformBrowser} from '@angular/common';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor(private _authenticationService: AuthenticationService, private _router: Router) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private _authenticationService: AuthenticationService, private _router: Router) {
   }
 
   onLogin() {
@@ -33,9 +35,35 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    (globalThis as any).handleCredentialResponse = (response: any) => {
-      this.handleGoogleLogin(response);
-    };
+    if (isPlatformBrowser(this.platformId)) {
+      this.initGoogleButton();
+      this.renderGoogleButton();
+    }
+  }
+
+  initGoogleButton() {
+    (globalThis as any).google.accounts.id.initialize({
+      client_id: environment.googleClientId,
+      callback: this.handleGoogleLogin.bind(this),
+      ux_mode: "popup",
+      auto_prompt: "false"
+    });
+  }
+
+  renderGoogleButton() {
+    (globalThis as any).google.accounts.id.renderButton(
+      document.getElementById("google-signin-button"),
+      {
+        type: 'standard',
+        theme: "outline",
+        size: "large",
+        text: "signin_with",
+        shape: "pill",
+        locale: "it",
+        logo_alignment: "left",
+        width: "200"
+      }
+    );
   }
 
   handleGoogleLogin(response: any) {
